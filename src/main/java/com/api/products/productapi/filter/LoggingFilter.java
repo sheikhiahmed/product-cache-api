@@ -21,7 +21,7 @@ public class LoggingFilter implements Filter{
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String url = httpServletRequest.getRequestURL().toString();
         String timeStamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        System.out.println("url: " + url + ", date and time: " + timeStamp);
+        log.info("url: " + url + ", date and time: " + timeStamp);
 
 
         HttpServletResponse httpResponse = (HttpServletResponse) response;
