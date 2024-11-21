@@ -28,4 +28,10 @@ public class ProductService {
         return productRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Entity is not found"));
     }
 
+    // Product by category
+    public List<Product> getProductsByCategory(String category){
+        return productRepository.findByCategory(category);
+
+    }
+
 }
