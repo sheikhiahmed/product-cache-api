@@ -1,12 +1,9 @@
-package com.api.products.productApi.model;
+package com.api.products.productapi.model;
 
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
-
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
 
 @Entity
 public class Product {
