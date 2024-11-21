@@ -2,6 +2,7 @@ package com.api.products.productapi.controller;
 
 import com.api.products.productapi.model.Product;
 import com.api.products.productapi.service.ProductService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,18 @@ public class ProductController {
     public ResponseEntity<List<Product>> getAllProducts(){
         List<Product> products = productService.getAllProducts();
         return ResponseEntity.ok(products); // code 200
+    }
+    //retrieve by id
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getById(@PathVariable Long id){
+        try{
+            Product product = productService.getOneProduct(id);
+            return ResponseEntity.ok(product);
+        }
+        catch (EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
     }
 
 
