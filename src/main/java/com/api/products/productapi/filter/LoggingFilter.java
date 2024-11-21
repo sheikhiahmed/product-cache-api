@@ -2,6 +2,7 @@ package com.api.products.productapi.filter;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -20,8 +21,12 @@ public class LoggingFilter implements Filter{
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String url = httpServletRequest.getRequestURL().toString();
         String timeStamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
         System.out.println("url: " + url + ", date and time: " + timeStamp);
+
+
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        httpResponse.setHeader("powered-by", "springboot");
+
 
         chain.doFilter(request, response);
     }
