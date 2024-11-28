@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product")
-public class ProductController {
+@RequestMapping("/api/products")
+public class ProductsController {
     @Autowired
     private ProductService productService;
 
@@ -31,7 +31,7 @@ public class ProductController {
     }
     //retrieve by id
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getById(@PathVariable Long id){
+    public ResponseEntity<Product> getProductById(@PathVariable Long id){
         try{
             Product product = productService.getOneProduct(id);
             return ResponseEntity.ok(product);
@@ -43,9 +43,9 @@ public class ProductController {
     }
 
     // retrieve Type
-    @GetMapping("/category/{type}")
-    public ResponseEntity<List<Product>> getProductByCategory(@PathVariable String type){
-        List<Product> products = productService.getProductsByCategory(type);
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<Product>> getProductByCategory(@PathVariable String category){
+        List<Product> products = productService.getProductsByCategory(category);
         return ResponseEntity.ok(products);
     }
 
