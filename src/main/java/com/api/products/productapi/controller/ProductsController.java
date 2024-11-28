@@ -58,7 +58,7 @@ public class ProductsController {
     }
 
     // Update a product
-    @PutMapping("{/id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody Product updateProduct){
         try{
             Product product = productService.updateProduct(id,updateProduct);
