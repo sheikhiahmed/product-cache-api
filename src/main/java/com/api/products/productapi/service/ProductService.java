@@ -49,4 +49,11 @@ public class ProductService {
         return existingProduct;
 
     }
+    // Delete a product
+    public void deleteProduct(Long id) throws ProductNotFoundException {
+        if (!productRepository.existsById(id)) {
+            throw new ProductNotFoundException("Product with ID " + id + " not found.");
+        }
+        productRepository.deleteById(id);
+    }
 }
