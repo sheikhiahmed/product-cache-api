@@ -44,8 +44,8 @@ public class ProductController {
 
     // retrieve Type
     @GetMapping("/category/{type}")
-    public ResponseEntity<List<Product>> getProductByCategory(@PathVariable String name){
-        List<Product> products = productService.getProductsByCategory(name);
+    public ResponseEntity<List<Product>> getProductByCategory(@PathVariable String type){
+        List<Product> products = productService.getProductsByCategory(type);
         return ResponseEntity.ok(products);
     }
 

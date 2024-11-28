@@ -1,7 +1,6 @@
-package com.api.products.productapi.model;
+package com.api.products.productapi.dto;
 
-
-import jakarta.persistence.Entity;
+import com.api.products.productapi.model.Product;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,15 +9,12 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-@Entity
-@Data
 @Builder
-@Setter
-@Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Product {
-
+@NoArgsConstructor
+@Getter
+@Setter
+public class ProductDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -34,5 +30,14 @@ public class Product {
 
     @NotNull(message = "Category is mandatory")
     private String category;
+    public Product productBuild(){
+        return Product.builder()
+                .name(this.name)
+                .description(this.description)
+                .price(this.price)
+                .category(this.category)
+                .build();
+
+    }
 
 }
