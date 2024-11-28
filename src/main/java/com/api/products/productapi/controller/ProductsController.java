@@ -57,5 +57,17 @@ public class ProductsController {
         return ResponseEntity.ok(products);
     }
 
+    // Update a product
+    @PutMapping("{/id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody Product updateProduct){
+        try{
+            Product product = productService.updateProduct(id,updateProduct);
+            return ResponseEntity.ok(product);
+        }
+        catch (ProductNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
 
 }

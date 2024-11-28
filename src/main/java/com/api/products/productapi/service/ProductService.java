@@ -15,6 +15,7 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
+
     //save a product
     public Product saveProduct( Product product ) throws ProductAlreadyExistsException {
         if(productRepository.existsById(product.getId())){
@@ -39,4 +40,13 @@ public class ProductService {
 
     }
 
+    public Product updateProduct(Long id, Product updateProduct) throws ProductNotFoundException{
+        Product existingProduct = productRepository.findById(id).orElseThrow(()-> new ProductNotFoundException("Product not found"));
+        existingProduct.setName(updateProduct.getName());
+        existingProduct.setCategory(updateProduct.getCategory());
+        existingProduct.setPrice(updateProduct.getPrice());
+        productRepository.save(existingProduct);
+        return existingProduct;
+
+    }
 }
