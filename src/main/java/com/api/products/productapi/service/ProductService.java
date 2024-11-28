@@ -1,5 +1,7 @@
 package com.api.products.productapi.service;
 
+import com.api.products.productapi.exception.ProductAlreadyExistsException;
+import com.api.products.productapi.exception.ProductNotFoundException;
 import com.api.products.productapi.model.Product;
 import com.api.products.productapi.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -14,7 +16,10 @@ public class ProductService {
     ProductRepository productRepository;
 
     //save a product
-    public Product saveProduct( Product product ){
+    public Product saveProduct( Product product ) throws ProductAlreadyExistsException {
+        if(productRepository.existsById(product.getId())){
+            throw new ProductAlreadyExistsException("Product with ID"+ product.getId()+"already exists");
+        }
         return productRepository.save(product);
 
     }
@@ -24,11 +29,11 @@ public class ProductService {
         return productRepository.findAll();
     }
     //retrieve one product
-    public Product getOneProduct(Long id){
-        return productRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Entity is not found"));
+    public Product getProductById(Long id) throws ProductNotFoundException {
+        return productRepository.findById(id).orElseThrow(()->new ProductNotFoundException("Product with ID " + id + " not found."));
     }
 
-    // Product by category
+    // Retrieve product by category
     public List<Product> getProductsByCategory(String category){
         return productRepository.findByCategory(category);
 
