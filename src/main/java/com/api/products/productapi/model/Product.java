@@ -11,7 +11,6 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Entity
-@Data
 @Builder
 @Setter
 @Getter
