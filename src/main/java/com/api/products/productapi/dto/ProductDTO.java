@@ -6,12 +6,15 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class ProductDTO {
+
+public class ProductDTO implements Serializable {
     private Long id;
 
     @NotNull(message = "Name is mandatory")

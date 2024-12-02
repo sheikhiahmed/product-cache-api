@@ -29,17 +29,19 @@ public class ProductService {
 
 
     //save a product using ProductDTO
-    @CachePut(value = "products", key = "#productDTO.id")
+    @CachePut(value = "products", key = "#result.id")
     public ProductDTO saveProduct(ProductDTO productDTO ) throws ProductAlreadyExistsException {
         // Convert DTO to Entity
         Product product = productDTO.toEntity();
 
-        if(productRepository.existsById(product.getId())){
+     /*   if(productRepository.existsById(product.getId())){
             throw new ProductAlreadyExistsException("Product with ID"+ product.getId()+"already exists");
-        }
+        }*/
         //Save the entity and return the saved DTO
         Product saveProduct = productRepository.save(product);
-        return ProductDTO.fromEntity(saveProduct);
+
+                ProductDTO p =ProductDTO.fromEntity(saveProduct);
+                return p;
 
     }
 
@@ -69,7 +71,7 @@ public class ProductService {
     }
 
 
-    @CachePut(value = "products", key = "#productDTO.id")
+    @CachePut(value = "products", key = "#product.id")
     public ProductDTO updateProduct(Long id, ProductDTO productDTO) throws ProductNotFoundException {
         Product existingProduct = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product with ID " + id + " not found."));
