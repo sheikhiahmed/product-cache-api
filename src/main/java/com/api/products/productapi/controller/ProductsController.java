@@ -18,8 +18,13 @@ import java.util.List;
 @RequestMapping("/api/products")
 @Validated
 public class ProductsController {
-    @Autowired
-    private ProductService productService;
+
+    private final ProductService productService;
+
+    // constructor DI
+    public ProductsController(ProductService productService){
+        this.productService = productService;
+    }
 
     @PostMapping
     public ResponseEntity<Product> saveProduct(@Valid @RequestBody Product product){
